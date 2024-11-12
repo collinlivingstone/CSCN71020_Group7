@@ -142,6 +142,7 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="rectangleSolver.c" />
     <ClCompile Include="triangleSolver.c" />
+    <ClCompile Include="triangle_checker.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h" />
