@@ -4,12 +4,15 @@
 #include "main.h"
 #include "triangleSolver.h"
 #include "rectangleSolver.h"
-#include "trianglechecker.h"
+#include "triangleChecker.h"
 
 int side = 0;
 
 int main() 
 {
+	double a, b, c;
+	double A, B, C;
+
 	bool continueProgram = true;
 	while (continueProgram) 
 	{
@@ -20,13 +23,24 @@ int main()
 		switch (shapeChoice)
 		{
 		case 1:
-			printf_s("Triangle selected.\n");
-			int triangleSides[3] = { 0, 0, 0 };
-			int* triangleSidesPtr = getTriangleSides(triangleSides);
-			//printf_s("! %d\n", triangleSidesPtr[0]);
-			char* result = analyzeTriangle(triangleSidesPtr[0], triangleSidesPtr[1], triangleSidesPtr[2]);
-			printf_s("%s\n", result);
-			break;
+
+			printf("Enter the side lengths of the triangle:\n");
+			a = get_side_length("Side 1: ");
+			b = get_side_length("Side 2: ");
+			c = get_side_length("Side 3: ");
+
+			if (can_form_triangle(a, b, c)) {
+				printf("The side lengths can form a triangle.\n");
+				calculate_angles(a, b, c, &A, &B, &C);
+				printf("The angles of the triangle are:\n");
+				printf("Angle A: %.2f°\n", A);
+				printf("Angle B: %.2f°\n", B);
+				printf("Angle C: %.2f°\n", C);
+			}
+			else
+			{
+				printf("The side lengths cannot form a triangle.\n");
+			}
 
 
 			//case 2: printf_s(Rectangle selected. \n");

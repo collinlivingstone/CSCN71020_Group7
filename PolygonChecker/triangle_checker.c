@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 #include <math.h>
 #include "trianglechecker.h"
@@ -38,32 +40,6 @@ void calculate_angles(double a, double b, double c, double* A, double* B, double
     *A = acos((b * b + c * c - a * a) / (2 * b * c)) * (180.0 / M_PI);
     *B = acos((a * a + c * c - b * b) / (2 * a * c)) * (180.0 / M_PI);
     *C = acos((a * a + b * b - c * c) / (2 * a * b)) * (180.0 / M_PI);
-}
-
-int main() 
-{
-    double a, b, c;
-    double A, B, C;
-
-    printf("Enter the side lengths of the triangle:\n");
-    a = get_side_length("Side 1: ");
-    b = get_side_length("Side 2: ");
-    c = get_side_length("Side 3: ");
-
-    if (can_form_triangle(a, b, c)) {
-        printf("The side lengths can form a triangle.\n");
-        calculate_angles(a, b, c, &A, &B, &C);
-        printf("The angles of the triangle are:\n");
-        printf("Angle A: %.2f°\n", A);
-        printf("Angle B: %.2f°\n", B);
-        printf("Angle C: %.2f°\n", C);
-    }
-    else 
-    {
-        printf("The side lengths cannot form a triangle.\n");
-    }
-
-    return 0;
 }
 
 
