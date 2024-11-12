@@ -10,8 +10,9 @@ int side = 0;
 
 int main() 
 {
-	double a, b, c;
-	double A, B, C;
+	//triangle variables
+	double triangleSideA, triangleSideB, triangleSideC;
+	double triangleAngleA, triangleAngleB, triangleAngleC;
 
 	bool continueProgram = true;
 	while (continueProgram) 
@@ -25,17 +26,17 @@ int main()
 		case 1://Triangle Selected
 
 			printf("Enter the side lengths of the triangle:\n");
-			a = get_side_length("Side 1: ");
-			b = get_side_length("Side 2: ");
-			c = get_side_length("Side 3: ");
+			triangleSideA = get_side_length("Side 1: ");
+			triangleSideB = get_side_length("Side 2: ");
+			triangleSideC = get_side_length("Side 3: ");
 
-			if (can_form_triangle(a, b, c)) {
+			if (can_form_triangle(triangleSideA, triangleSideB, triangleSideC)) {
 				printf("The side lengths can form a triangle.\n");
-				calculate_angles(a, b, c, &A, &B, &C);
+				calculate_angles(triangleSideA, triangleSideB, triangleSideC, &triangleAngleA, &triangleAngleB, &triangleAngleC);
 				printf("The angles of the triangle are:\n");
-				printf("Angle A: %.2f°\n", A);
-				printf("Angle B: %.2f°\n", B);
-				printf("Angle C: %.2f°\n", C);
+				printf("Angle A: %.2f°\n", triangleAngleA);
+				printf("Angle B: %.2f°\n", triangleAngleB);
+				printf("Angle C: %.2f°\n", triangleAngleC);
 			}
 			else
 			{
@@ -53,6 +54,8 @@ int main()
 		case 0:
 			continueProgram = false;
 			break;
+
+
 		default:
 			printf_s("Invalid value entered.\n");
 			break;
