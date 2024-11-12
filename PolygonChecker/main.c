@@ -4,6 +4,7 @@
 #include "main.h"
 #include "triangleSolver.h"
 #include "rectangleSolver.h"
+#include "trianglechecker.h"
 
 int side = 0;
 
