@@ -22,3 +22,12 @@ char* analyzeTriangle(int side1, int side2, int side3) {
 
 	return result;
 }
+
+int* getTriangleSides(int* triangleSides) {
+	printf_s("Enter the three sides of the triangle: ");
+	for (int i = 0; i < 3; i++)
+	{
+		scanf_s("%d", &triangleSides[i]);
+	}
+	return triangleSides;
+}
