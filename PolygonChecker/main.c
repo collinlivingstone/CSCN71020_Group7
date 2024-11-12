@@ -24,6 +24,12 @@ int main() {
 			char* result = analyzeTriangle(triangleSidesPtr[0], triangleSidesPtr[1], triangleSidesPtr[2]);
 			printf_s("%s\n", result);
 			break;
+			//case 2: printf_s(Rectangle selected. \n");
+			//
+			//
+			//
+			//
+			//break;
 		case 0:
 			continueProgram = false;
 			break;
@@ -46,7 +52,7 @@ void printWelcome() {
 int printShapeMenu() {
 	printf_s("1. Triangle\n");
 
-	// PUT RECTANGLE PRINT HERE
+	//printf_s(2. Rectangle\n"); 
 
 	printf_s("0. Exit\n");
 
