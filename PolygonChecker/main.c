@@ -4,12 +4,15 @@
 #include "main.h"
 #include "triangleSolver.h"
 #include "rectangleSolver.h"
+#include "trianglechecker.h"
 
 int side = 0;
 
-int main() {
+int main() 
+{
 	bool continueProgram = true;
-	while (continueProgram) {
+	while (continueProgram) 
+	{
 		printWelcome();
 
 		int shapeChoice = printShapeMenu();
@@ -43,7 +46,8 @@ int main() {
 	return 0;
 }
 
-void printWelcome() {
+void printWelcome() 
+{
 	printf_s("\n");
 	printf_s(" **********************\n");
 	printf_s("**     Welcome to     **\n");
@@ -51,7 +55,8 @@ void printWelcome() {
 	printf_s(" **********************\n");
 }
 
-int printShapeMenu() {
+int printShapeMenu() 
+{
 	printf_s("1. Triangle\n");
 
 	//printf_s(2. Rectangle\n"); 
