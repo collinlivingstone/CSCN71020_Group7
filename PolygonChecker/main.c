@@ -22,7 +22,7 @@ int main()
 
 		switch (shapeChoice)
 		{
-		case 1:
+		case 1://Triangle Selected
 
 			printf("Enter the side lengths of the triangle:\n");
 			a = get_side_length("Side 1: ");
@@ -43,12 +43,13 @@ int main()
 			}
 
 
-			//case 2: printf_s(Rectangle selected. \n");
-			//
-			//
-			//
-			//
-			//break;
+		case 2: //Rectangle Selected
+				printf_s("Rectangle Selected\n");
+
+
+
+			break;
+
 		case 0:
 			continueProgram = false;
 			break;
