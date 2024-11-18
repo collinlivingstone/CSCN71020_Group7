@@ -45,6 +45,7 @@ int main()
 
 
 		case 2: //Rectangle Selected
+
 				printf_s("Rectangle Selected\n");
 
 
@@ -77,7 +78,7 @@ int printShapeMenu()
 {
 	printf_s("1. Triangle\n");
 
-	//printf_s(2. Rectangle\n"); 
+	printf_s("2. Rectangle\n"); 
 
 	printf_s("0. Exit\n");
 
