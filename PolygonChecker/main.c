@@ -41,13 +41,14 @@ int main()
 			else
 			{
 				printf("The side lengths cannot form a triangle.\n");
+				break;
 			}
 
 
 		case 2: //Rectangle Selected
 
 				printf_s("Rectangle Selected\n");
-
+				rectangleSolver();
 
 
 			break;
