@@ -1,2 +1,8 @@
 #pragma once
-char* analyzeTriangle(int side1, int side2, int side3);
+
+//
+double get_side_length(const char*);
+
+int can_form_triangle(double, double, double);
+
+void CalculateAngles(double, double, double, double*, double*, double*);

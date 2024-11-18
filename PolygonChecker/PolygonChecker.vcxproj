@@ -140,15 +140,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
-    <ClCompile Include="rectangleSolver.c" />
-    <ClCompile Include="triangleSolver.c" />
-    <ClCompile Include="triangle_checker.c" />
+    <ClCompile Include="RectangleSolver.c" />
+    <ClCompile Include="OldTriangleSolver.c" />
+    <ClCompile Include="TriangleSolver.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h" />
-    <ClInclude Include="rectangleSolver.h" />
-    <ClInclude Include="triangleChecker.h" />
-    <ClInclude Include="triangleSolver.h" />
+    <ClInclude Include="RectangleSolver.h" />
+    <ClInclude Include="TriangleSolver.h" />
+    <ClInclude Include="OldTriangleSolver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

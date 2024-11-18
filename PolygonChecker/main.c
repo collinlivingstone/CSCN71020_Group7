@@ -2,9 +2,8 @@
 #include <stdbool.h>
 
 #include "main.h"
-#include "triangleSolver.h"
-#include "rectangleSolver.h"
-#include "triangleChecker.h"
+#include "RectangleSolver.h"
+#include "TriangleSolver.h"
 
 int side = 0;
 

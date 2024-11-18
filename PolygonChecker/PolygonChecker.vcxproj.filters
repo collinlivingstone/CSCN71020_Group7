@@ -18,24 +18,27 @@
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="triangleSolver.c">
+    <ClCompile Include="OldTriangleSolver.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rectangleSolver.c">
+    <ClCompile Include="RectangleSolver.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="triangle_checker.c">
+    <ClCompile Include="TriangleSolver.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="triangleSolver.h">
+    <ClInclude Include="OldTriangleSolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="rectangleSolver.h">
+    <ClInclude Include="RectangleSolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TriangleSolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

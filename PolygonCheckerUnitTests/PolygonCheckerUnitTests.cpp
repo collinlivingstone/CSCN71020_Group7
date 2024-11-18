@@ -21,7 +21,7 @@ namespace PolygonCheckerUnitTests
 
 		}
 
-		TEST_METHOD(TriangleCheckerExceptionTests)
+		TEST_METHOD(TriangleCheckerBoundryTests)
 		{
 
 		}
@@ -41,7 +41,7 @@ namespace PolygonCheckerUnitTests
 
 		}
 
-		TEST_METHOD(RectangleSolverExceptionTests)
+		TEST_METHOD(RectangleSolverBoundryTests)
 		{
 
 		}
