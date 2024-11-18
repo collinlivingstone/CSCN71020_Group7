@@ -35,7 +35,7 @@ int can_form_triangle(double a, double b, double c)
 }
 
 // Function to calculate the angles of the triangle in degrees
-void calculate_angles(double a, double b, double c, double* A, double* B, double* C) 
+void CalculateAngles(double a, double b, double c, double* A, double* B, double* C) 
 {
     *A = acos((b * b + c * c - a * a) / (2 * b * c)) * (180.0 / M_PI);
     *B = acos((a * a + c * c - b * b) / (2 * a * c)) * (180.0 / M_PI);

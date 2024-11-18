@@ -32,7 +32,7 @@ int main()
 
 			if (can_form_triangle(triangleSideA, triangleSideB, triangleSideC)) {
 				printf("The side lengths can form a triangle.\n");
-				calculate_angles(triangleSideA, triangleSideB, triangleSideC, &triangleAngleA, &triangleAngleB, &triangleAngleC);
+				CalculateAngles(triangleSideA, triangleSideB, triangleSideC, &triangleAngleA, &triangleAngleB, &triangleAngleC);
 				printf("The angles of the triangle are:\n");
 				printf("Angle A: %.2f°\n", triangleAngleA);
 				printf("Angle B: %.2f°\n", triangleAngleB);
@@ -49,16 +49,14 @@ int main()
 
 				printf_s("Rectangle Selected\n");
 				rectangleSolver();
-
-
 			break;
 
-		case 0:
+		case 0: //Exit
 			continueProgram = false;
 			break;
 
 
-		default:
+		default: //Invalid entry
 			printf_s("Invalid value entered.\n");
 			break;
 		}
