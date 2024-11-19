@@ -1,4 +1,4 @@
 #pragma once
-void printWelcome();
-int printShapeMenu();
+void PrintWelcome();
+int PrintShapeMenu();
 int* getTriangleSides(int* triangleSides);

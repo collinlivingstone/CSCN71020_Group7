@@ -3,8 +3,10 @@
 #include <math.h>
 #include <stdbool.h>
 
+#define PERIMETER_DOUBLE 2
+
 // Function to calculate the squared distance between two points
-double distance_squared(double x1, double y1, double x2, double y2) {
+double DistanceSquared(double x1, double y1, double x2, double y2) {
     return (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
 }
 // Function to calculate the actual distance between two points
@@ -13,14 +15,14 @@ double distance(double x1, double y1, double x2, double y2) {
 }
 
 // Function to determine if four points form a rectangle
-bool is_rectangle(double points[4][2]) {
+bool IsRectangle(double points[4][2]) {
     // Compute all pairwise distances
     double distances[6];
     int k = 0;
 
     for (int i = 0; i < 4; i++) {
         for (int j = i + 1; j < 4; j++) {
-            distances[k++] = distance_squared(points[i][0], points[i][1], points[j][0], points[j][1]);
+            distances[k++] = DistanceSquared(points[i][0], points[i][1], points[j][0], points[j][1]);
         }
     }
 
@@ -44,10 +46,17 @@ bool is_rectangle(double points[4][2]) {
 }
 
 // Main function
-void rectangleSolver() {
+void RectangleSolver() {
     double points[4][2];
+    double perimeter = 0;
+    double distances[6];
 
-    printf("Enter the coordinates of the four points (x, y) in any order:\n");
+    //Sides
+    double side1 = 0;
+    double side2 = 0;
+
+    //Enter coordinates
+    printf("Enter the coordinates of four points (x, y) in any order:\n");
     for (int i = 0; i < 4; i++) {
         printf("Point %d (format x y): ", i + 1);
         if (scanf("%lf %lf", &points[i][0], &points[i][1]) != 2) {
@@ -56,9 +65,8 @@ void rectangleSolver() {
         }
     }
 
-    if (is_rectangle(points)) {
+    if (IsRectangle(points)) {
         // Compute pairwise distances
-        double distances[6];
         int k = 0;
 
         for (int i = 0; i < 4; i++) {
@@ -79,11 +87,11 @@ void rectangleSolver() {
         }
 
         // The two smallest distances are the sides of the rectangle
-        double side1 = distances[0];
-        double side2 = distances[2];
+        side1 = distances[0];
+        side2 = distances[2];
 
         // Calculate perimeter and area
-        double perimeter = 2 * (side1 + side2);
+        perimeter = PERIMETER_DOUBLE * (side1 + side2);
         double area = side1 * side2;
 
         printf("The points form a rectangle.\n");
@@ -91,7 +99,17 @@ void rectangleSolver() {
         printf("Area: %.2f\n", area);
     }
     else {
-        printf("The points do not form a rectangle.\n");
+
+        side1 = distances[0];
+        side2 = distances[2];
+
+        //Just perimeter
+        perimeter = PERIMETER_DOUBLE * (side1 + side2);
+
+        printf("The points selected do not form a rectangle.\n");
+        printf("Perimeter: %.2f\n", perimeter);
+
+
     }
 }
 

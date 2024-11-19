@@ -9,7 +9,7 @@
 #endif
 
 // Function to get a valid side length from the user
-double get_side_length(const char* prompt) 
+double GetSideLength(const char* prompt) 
 {
     double length;
     while (1) 
@@ -22,6 +22,7 @@ double get_side_length(const char* prompt)
         else 
         {
             printf("Invalid input. Please enter a positive number.\n");
+
             // Clear input buffer
             while (getchar() != '\n');
         }
@@ -29,7 +30,7 @@ double get_side_length(const char* prompt)
 }
 
 // Function to check if the three sides can form a triangle
-int can_form_triangle(double a, double b, double c) 
+int CanFormTriangle(double a, double b, double c) 
 {
     return (a + b > c) && (a + c > b) && (b + c > a);
 }

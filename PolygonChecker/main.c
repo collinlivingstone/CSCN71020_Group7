@@ -16,22 +16,25 @@ int main()
 	bool continueProgram = true;
 	while (continueProgram) 
 	{
-		printWelcome();
+		PrintWelcome();
 
-		int shapeChoice = printShapeMenu();
+		int shapeChoice = PrintShapeMenu();
 
+		//Menu
 		switch (shapeChoice)
 		{
-		case 1://Triangle Selected
+		case 1://triangle Selected
 
-			printf("Enter the side lengths of the triangle:\n");
-			triangleSideA = get_side_length("Side 1: ");
-			triangleSideB = get_side_length("Side 2: ");
-			triangleSideC = get_side_length("Side 3: ");
+			printf("Please enter the side lengths of the triangle:\n");
+			triangleSideA = GetSideLength("Side 1: ");
+			triangleSideB = GetSideLength("Side 2: ");
+			triangleSideC = GetSideLength("Side 3: ");
 
-			if (can_form_triangle(triangleSideA, triangleSideB, triangleSideC)) {
+			if (CanFormTriangle(triangleSideA, triangleSideB, triangleSideC)) {
 				printf("The side lengths can form a triangle.\n");
+
 				CalculateAngles(triangleSideA, triangleSideB, triangleSideC, &triangleAngleA, &triangleAngleB, &triangleAngleC);
+
 				printf("The angles of the triangle are:\n");
 				printf("Angle A: %.2f°\n", triangleAngleA);
 				printf("Angle B: %.2f°\n", triangleAngleB);
@@ -44,35 +47,37 @@ int main()
 			}
 
 
-		case 2: //Rectangle Selected
+		case 2: //rectangle Selected
 
 				printf_s("Rectangle Selected\n");
-				rectangleSolver();
+				RectangleSolver();
 			break;
 
-		case 0: //Exit
+		case 0: //exit
+
 			continueProgram = false;
 			break;
 
-
-		default: //Invalid entry
+		default: //invalid entry
 			printf_s("Invalid value entered.\n");
 			break;
 		}
 	}
+
 	return 0;
 }
 
-void printWelcome() 
+void PrintWelcome() 
 {
 	printf_s("\n");
 	printf_s(" **********************\n");
 	printf_s("**     Welcome to     **\n");
 	printf_s("**   Polygon Checker  **\n");
 	printf_s(" **********************\n");
+	printf("\n");
 }
 
-int printShapeMenu() 
+int PrintShapeMenu() 
 {
 	printf_s("1. Triangle\n");
 
