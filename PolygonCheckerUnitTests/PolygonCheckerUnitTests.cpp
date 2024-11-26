@@ -2,17 +2,17 @@
 #include "CppUnitTest.h"
 
 //Triangle testing functions
-extern "C" void CalculateAngles(double, double, double, double*, double*, double*);
-extern "C" int CanFormTriangle(double, double, double);
-extern "C" void CalculateAngles(double, double, double, double*, double*, double*);
-extern "C" char* FindTypeOfTriangle(double, double, double);
+extern "C" void CalculateAngles(double, double, double, double*, double*, double*); //Tested
+extern "C" int CanFormTriangle(double, double, double); //Tested
+extern "C" char* FindTypeOfTriangle(double, double, double); // Tested
 
 //Rectangle testing functions
 extern "C" double Distance(double, double, double, double);
 extern "C" double DistanceSquared(double, double, double, double);
-extern "C" bool IsRectangle(double points[4][2]);
-extern "C" bool CalculatePerimeter(double points[4][2]);
-extern "C" bool CalculateRectangleArea(double points[4][2]);
+
+extern "C" bool IsRectangle(double points[4][2]); //Tested
+extern "C" bool CalculatePerimeter(double points[4][2]); //Need to test
+extern "C" bool CalculateRectangleArea(double points[4][2]); //Need to test
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -192,7 +192,6 @@ namespace PolygonCheckerUnitTests
 	};
 
 
-
 	//Perimeter Tests -----------------------------------------------
 
 	TEST_CLASS(PerimeterClockwiseFunctionalityTests) 
@@ -222,13 +221,10 @@ namespace PolygonCheckerUnitTests
 			Assert::AreEqual(4.0, result);
 
 		}
-
-
 	};
 
-
-
 	//============================================================= Triangle Functions ======================================================
+
 	TEST_CLASS(TriangleFunctionalityTests)
 	{
 	public:
@@ -290,7 +286,7 @@ namespace PolygonCheckerUnitTests
 	};
 
 
-	//Calculate angle tests ----------------------------------------------
+	//Calculate angle tests --------------------------------------------------------
 
 	TEST_CLASS(CalculateAnglesTests)
 	{
@@ -392,7 +388,7 @@ namespace PolygonCheckerUnitTests
 	};
 
 
-	//Find type of triangle tests ----------------------------------------------
+	//Find type of triangle tests ----------------------------------------------------
 
 	TEST_CLASS(TestTypeOfTriangle)
 	{
@@ -400,7 +396,7 @@ namespace PolygonCheckerUnitTests
 
 		TEST_METHOD(FindEquilateralTriangle)
 		{
-			//Anlges
+			//Equilateral angle triangle
 			double angleA = 60;
 			double angleB = 60;
 			double angleC = 60;
@@ -413,7 +409,7 @@ namespace PolygonCheckerUnitTests
 
 		TEST_METHOD(FindIsosceleseTriangle)
 		{
-			//Anlges
+			//Isoscelese angle triangle
 			double angleA = 36;
 			double angleB = 72;
 			double angleC = 72;
@@ -426,7 +422,7 @@ namespace PolygonCheckerUnitTests
 
 		TEST_METHOD(FindObtuseTriangle)
 		{
-			//Anlges
+			//Obtuse angle triangle
 			double angleA = 50;
 			double angleB = 110;
 			double angleC = 20;
@@ -439,7 +435,7 @@ namespace PolygonCheckerUnitTests
 
 		TEST_METHOD(FindRightTriangle)
 		{
-			//Anlges
+			//Right angle triangle 
 			double angleA = 45;
 			double angleB = 45;
 			double angleC = 90;
@@ -450,9 +446,9 @@ namespace PolygonCheckerUnitTests
 
 		}
 
-		TEST_METHOD(FindNotATriangle)
+		TEST_METHOD(ValidateNotATriangle)
 		{
-			//Anlges
+			//Not a triangle validation
 			double angleA = 180;
 			double angleB = 105;
 			double angleC = 200;
@@ -462,12 +458,6 @@ namespace PolygonCheckerUnitTests
 			Assert::AreEqual("NTriangle", result);
 
 		}
-
-
 	};
-
-
-
-
 
 }

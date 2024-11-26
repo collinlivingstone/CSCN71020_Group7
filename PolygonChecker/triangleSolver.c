@@ -53,52 +53,58 @@ void CalculateAngles(double sideA, double sideB, double sideC, double* angleA, d
 char* FindTypeOfTriangle(double angleA, double angleB, double angleC) {
 
 
-    //1e-6 is the room for error (with floating point math)
-    printf("\n");
+    double tolerance = 1e-6; // Allowable error for floating-point comparisons
 
-    //Check to see if it is a triangle
-    if (angleA + angleB + angleC == 180) {
+    // Check if it is a valid triangle
+    if (fabs(angleA + angleB + angleC - 180.0) < tolerance) {
 
-        // Check for equilateral triangle (all angles are 60)
-        if (fabs(angleA - 60.0) < 1e-6 && fabs(angleB - 60.0) < 1e-6 && fabs(angleC - 60.0) < 1e-6) {
-            printf("The chosen sides creates an Equilateral Triangle\n");
+        // Check for equilateral triangle
+        if (fabs(angleA - angleB) < tolerance && fabs(angleB - angleC) < tolerance) {
+            printf("The chosen angles create an Equilateral Triangle\n");
             return "Equilateral";
         }
 
         // Check for isosceles triangle (two angles are the same)
-        else if (fabs(angleA - angleB) < 1e-6 || fabs(angleB - angleC) < 1e-6 || fabs(angleA - angleC) < 1e-6) {
-            printf("The chosen sides create an Isosceles Triangle\n");
+        if (fabs(angleA - angleB) < tolerance || fabs(angleB - angleC) < tolerance || fabs(angleA - angleC) < tolerance) {
+            printf("The chosen angles create an Isosceles Triangle\n");
 
+            // Check if it's also a right triangle
+            if (fabs(angleA - 90.0) < tolerance || fabs(angleB - 90.0) < tolerance || fabs(angleC - 90.0) < tolerance) {
+                printf("It is also a Right Triangle.\n");
 
-            //Check if it is a right angle
-            if (angleA == 90 || angleB == 90 || angleC == 90) {
-
-                printf("It is a right angle.\n");
                 return "Right";
+            }
 
-            }
-            else
-            {
-                return "Isosceles";
-            }
-                
+            return "Isosceles";
         }
 
-        // Check for obtuse triangle (one angle is greater than 90)
-        else if (angleA > 90.0 || angleB > 90.0 || angleC > 90.0 && angleA + angleB + angleC == 180) {
-            printf("The chosen sides create an Obtuse Triangle\n");
+        // Check for obtuse triangle (one angle greater than 90)
+        if (angleA > 90.0 || angleB > 90.0 || angleC > 90.0) {
+            printf("The chosen angles create an Obtuse Triangle\n");
             return "Obtuse";
         }
 
-    }
-    
-    // If none of the above, it must be an acute triangle (all angles less than 90)
-    else {
-        printf("The chosen sides create an Acute Triangle\n");
-        return "NTriangle";
+        // Check for scalene triangle (all angles are different)
+        if (fabs(angleA - angleB) >= tolerance && fabs(angleB - angleC) >= tolerance && fabs(angleA - angleC) >= tolerance) {
+            printf("The chosen angles create a Scalene Triangle\n");
+
+            // Check if it's also acute (all angles less than 90)
+            if (angleA < 90.0 && angleB < 90.0 && angleC < 90.0) {
+                printf("It is also an Acute Triangle.\n");
+                return "Acute Scalene";
+            }
+
+            return "Scalene";
+        }
+
+        // Otherwise, it must be acute (all angles less than 90)
+        printf("The chosen angles create an Acute Triangle\n");
+        return "Acute";
     }
 
-    printf("\n");
+    // If angles do not form a valid triangle
+    printf("The chosen angles do not form a valid triangle.\n");
+    return "NTriangle";
 }
 
 

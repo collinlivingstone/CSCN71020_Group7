@@ -14,13 +14,17 @@ int main()
 	double triangleSideA, triangleSideB, triangleSideC;
 	double triangleAngleA, triangleAngleB, triangleAngleC;
 
+	int entry = 1;
+
 	bool continueProgram = true;
 
 	while (continueProgram) 
 	{
-		printf("=========================================================");
+		printf("=========================================================\n");
+		printf("Entry: %d\n", entry);
 		printf("\n");
 		PrintWelcome();
+		entry++;
 
 		int shapeChoice = PrintShapeMenu();
 

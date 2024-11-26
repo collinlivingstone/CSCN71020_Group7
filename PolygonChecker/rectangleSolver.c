@@ -14,7 +14,7 @@ void InputPointsRectangle(double points[4][2]) {
         if (scanf("%lf %lf", &points[i][0], &points[i][1]) != 2) {
 
             printf("Invalid input. Please try again.\n");
-            i--; // Retry the current point
+            i--; // Return to the current point
         }
     }
 }
@@ -24,7 +24,7 @@ double Distance(double x1, double y1, double x2, double y2) {
     return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
-// Helper function: Calculate squared distance between two points
+// Calculate squared distance between two points
 double DistanceSquared(double x1, double y1, double x2, double y2) {
     return (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
 }
@@ -51,7 +51,7 @@ bool IsRectangle(double points[4][2]) {
     }
 
 
-    // Compute all six pairwise squared distances
+    // Find all six pairwise squared distances
     double distances[6];
     int k = 0;
     for (int i = 0; i < 4; i++) {
@@ -96,7 +96,7 @@ double CalculatePerimeter(double points[4][2]) {
     return perimeter;
 }
 
-// Calculate the area of a rectangle formed by four points
+// Calculate the area of a rectangle 
 double CalculateRectangleArea(double points[4][2]) {
 
     if (!IsRectangle(points)) {
