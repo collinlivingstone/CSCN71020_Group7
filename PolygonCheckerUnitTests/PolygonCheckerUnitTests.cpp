@@ -49,15 +49,7 @@ namespace PolygonCheckerUnitTests
 			Assert::IsTrue(IsRectangle(points));
 		}
 
-
-		TEST_METHOD(CheckSamePointsNegative1)
-		{
-			double points[4][2] = { {-1,-1}, {-1,-1}, {-1,-1}, {-1,-1} };
-
-			Assert::IsFalse(IsRectangle(points));
-		}
-
-		TEST_METHOD(CheckDecimalPairs)
+		TEST_METHOD(CheckDecimalPairings1)
 		{
 			double points[4][2] = { {0.5,0.5}, {0.5,-0.5}, {-0.7,-0.5}, {-0.7,0.5} };
 
@@ -89,6 +81,13 @@ namespace PolygonCheckerUnitTests
 		TEST_METHOD(CheckSamePoints3)
 		{
 			double points[4][2] = { {3,3}, {3,3}, {3,3}, {3,3} };
+
+			Assert::IsFalse(IsRectangle(points));
+		}
+
+		TEST_METHOD(CheckSamePointsNegative1)
+		{
+			double points[4][2] = { {-1,-1}, {-1,-1}, {-1,-1}, {-1,-1} };
 
 			Assert::IsFalse(IsRectangle(points));
 		}
@@ -211,8 +210,6 @@ namespace PolygonCheckerUnitTests
 			Assert::AreEqual(8.0, result);
 
 		}
-
-	
 	};
 
 	//Area Tests -----------------------------------------------
@@ -235,8 +232,7 @@ namespace PolygonCheckerUnitTests
 
 
 
-	//Triangle Functions======================================================
-
+	//============================================================= Triangle Functions ======================================================
 	TEST_CLASS(TriangleFunctionalityTests)
 	{
 	public:
