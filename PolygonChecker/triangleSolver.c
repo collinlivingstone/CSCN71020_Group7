@@ -10,6 +10,9 @@
 #define M_PI 3.14159265358979323846
 #endif
 
+// Small epsilon value for floating-point comparison - Delete if needed 
+#define EPSILON 1e-6
+
 // Function to get a valid side length from the user
 double GetSideLength(const char* prompt) 
 {
@@ -48,6 +51,11 @@ void CalculateAngles(double sideA, double sideB, double sideC, double* angleA, d
     *angleA = acos((sideB * sideB + sideC * sideC - sideA * sideA) / (2 * sideB * sideC)) * (180.0 / M_PI);
     *angleB = acos((sideA * sideA + sideC * sideC - sideB * sideB) / (2 * sideA * sideC)) * (180.0 / M_PI);
     *angleC = acos((sideA * sideA + sideB * sideB - sideC * sideC) / (2 * sideA * sideB)) * (180.0 / M_PI);
+}
+
+// Helper function for floating-point comparisons - Delete if uneeded
+bool AreEqual(double a, double b) {
+    return fabs(a - b) < EPSILON;
 }
 
 char* FindTypeOfTriangle(double angleA, double angleB, double angleC) {
@@ -117,40 +125,3 @@ char* FindTypeOfTriangle(double angleA, double angleB, double angleC) {
     printf("The chosen angles do not form a valid triangle.\n");
     return "NTriangle";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
