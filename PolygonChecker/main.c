@@ -6,6 +6,7 @@
 #include "TriangleSolver.h"
 
 int side = 0;
+double points[4][2];
 
 int main() 
 {
@@ -49,8 +50,28 @@ int main()
 
 		case 2: //rectangle Selected
 
-				printf_s("Rectangle Selected\n");
-				RectangleSolver();
+			//Get rectangle input
+			InputPointsRectangle(points);
+
+			//If the points form a rectangle
+			if (IsRectangle(points)) {
+				double perimeter = CalculatePerimeter(points);
+				double area = CalculateRectangleArea(points);
+
+				printf("\n");
+				printf("The points you entered form a rectangle\n");
+				printf("Perimeter: %.2f\n", perimeter);
+				printf("Area: %.2f\n", area);
+			}
+			//If points dont create rectangle
+			else { 
+
+				double perimeter = CalculatePerimeter(points);
+
+				printf("These points do not form a rectangle.\n");
+				printf("The perimeter of this shape is: %.2f\n", perimeter);
+			}
+
 			break;
 
 		case 0: //exit

@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
+#include <stdbool.h>
 #include <math.h>
 #include "TriangleSolver.h"
 
@@ -30,9 +31,13 @@ double GetSideLength(const char* prompt)
 }
 
 // Function to check if the three sides can form a triangle
-int CanFormTriangle(double a, double b, double c) 
+bool CanFormTriangle(double a, double b, double c) 
 {
-    return (a + b > c) && (a + c > b) && (b + c > a);
+    //check if positive numbers
+    if (a > 0 && b > 0 && c > 0)
+        return (a + b > c) && (a + c > b) && (b + c > a);
+    else
+        return false;
 }
 
 // Function to calculate the angles of the triangle in degrees
