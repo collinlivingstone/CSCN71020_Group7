@@ -15,6 +15,7 @@ int main()
 	double triangleAngleA, triangleAngleB, triangleAngleC;
 
 	bool continueProgram = true;
+
 	while (continueProgram) 
 	{
 		PrintWelcome();
@@ -27,25 +28,34 @@ int main()
 		case 1://triangle Selected
 
 			printf("Please enter the side lengths of the triangle:\n");
+
+			//Get side lengths
 			triangleSideA = GetSideLength("Side 1: ");
 			triangleSideB = GetSideLength("Side 2: ");
 			triangleSideC = GetSideLength("Side 3: ");
 
+			//Check to see if triangle can be formed
 			if (CanFormTriangle(triangleSideA, triangleSideB, triangleSideC)) {
+
+				printf("\n");
 				printf("The side lengths can form a triangle.\n");
 
-				CalculateAngles(triangleSideA, triangleSideB, triangleSideC, &triangleAngleA, &triangleAngleB, &triangleAngleC);
+				CalculateAngles(triangleSideA, triangleSideB, triangleSideC, &triangleAngleA, &triangleAngleB, &triangleAngleC); 
+
+				FindTypeOfTriangle(triangleAngleA, triangleAngleB, triangleAngleC);
 
 				printf("The angles of the triangle are:\n");
-				printf("Angle A: %.2f°\n", triangleAngleA);
-				printf("Angle B: %.2f°\n", triangleAngleB);
-				printf("Angle C: %.2f°\n", triangleAngleC);
+				printf("Angle A: %.2f degrees\n", triangleAngleA);
+				printf("Angle B: %.2f degrees\n", triangleAngleB);
+				printf("Angle C: %.2f degrees\n", triangleAngleC);
 			}
 			else
 			{
 				printf("The side lengths cannot form a triangle.\n");
-				break;
+				printf("\n");
 			}
+
+			break;
 
 
 		case 2: //rectangle Selected
@@ -62,6 +72,7 @@ int main()
 				printf("The points you entered form a rectangle\n");
 				printf("Perimeter: %.2f\n", perimeter);
 				printf("Area: %.2f\n", area);
+				printf("\n");
 			}
 			//If points dont create rectangle
 			else { 
@@ -76,12 +87,15 @@ int main()
 
 		case 0: //exit
 
+			printf("Exiting Polygon Calculator\n");
 			continueProgram = false;
 			break;
 
 		default: //invalid entry
+
 			printf_s("Invalid value entered.\n");
 			break;
+
 		}
 	}
 

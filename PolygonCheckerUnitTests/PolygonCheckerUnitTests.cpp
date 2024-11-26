@@ -275,18 +275,18 @@ namespace PolygonCheckerUnitTests
 
 		TEST_METHOD(CheckIfTriangleNegative1)
 		{
-			int side1 = -0.5;
-			int side2 = -0.5;
-			int side3 = -0.5;
+			double side1 = -0.5;
+			double side2 = -0.5;
+			double side3 = -0.5;
 
 			Assert::IsFalse(CanFormTriangle(side1, side2, side3));
 		}
 
 		TEST_METHOD(CheckIfTriangleNegative2)
 		{
-			int side1 = -5;
-			int side2 = -5;
-			int side3 = -5;
+			double side1 = -5;
+			double side2 = -5;
+			double side3 = -5;
 
 			Assert::IsFalse(CanFormTriangle(side1, side2, side3));
 		}
@@ -296,4 +296,103 @@ namespace PolygonCheckerUnitTests
 
 
 	//Calculate angle tests ----------------------------------------------
+
+	TEST_CLASS(CalculateAnglesTests)
+	{
+	public:
+
+		TEST_METHOD(CalculateTriangleAnglesEqu)
+		{
+			//Sides
+			double side1 = 5;
+			double side2 = 5;
+			double side3 = 5;
+
+			//Anlges
+			double angleA;
+			double angleB;
+			double angleC;
+
+			//Run function
+			CalculateAngles(side1, side2, side3, &angleA, &angleB, &angleC);
+
+			//Floating point number accuracy allowance
+			double fpErrorAllowance = 0.01;
+
+			Assert::AreEqual(60.0, angleA, fpErrorAllowance);
+			Assert::AreEqual(60.0, angleA, fpErrorAllowance);
+			Assert::AreEqual(60.0, angleA, fpErrorAllowance);
+		}
+
+		TEST_METHOD(CalculateTriangleAnglesIso)
+		{
+			//Sides
+			double side1 = 10;
+			double side2 = 10;
+			double side3 = 5;
+
+			//Anlges
+			double angleA = 0;
+			double angleB = 0;
+			double angleC = 0;
+
+			//Run function
+			CalculateAngles(side1, side2, side3, &angleA, &angleB, &angleC);
+
+			//Floating point number accuracy allowance
+			double fpErrorAllowance = 0.01;
+
+			Assert::AreEqual(75.52, angleA, fpErrorAllowance);
+			Assert::AreEqual(75.52, angleB, fpErrorAllowance);
+			Assert::AreEqual(28.95, angleC, fpErrorAllowance);
+		}
+
+		TEST_METHOD(CalculateTriangleAnglesObt)
+		{
+			//Sides
+			double side1 = 10;
+			double side2 = 5;
+			double side3 = 7;
+
+			//Anlges
+			double angleA = 0;
+			double angleB = 0;
+			double angleC = 0;
+
+			//Run function
+			CalculateAngles(side1, side2, side3, &angleA, &angleB, &angleC);
+
+			//Floating point number accuracy allowance
+			double fpErrorAllowance = 0.01;
+
+			Assert::AreEqual(111.80, angleA, fpErrorAllowance);
+			Assert::AreEqual(27.66, angleB, fpErrorAllowance);
+			Assert::AreEqual(40.53, angleC, fpErrorAllowance);
+		}
+
+
+		TEST_METHOD(CalculateTriangleAnglesDecimals)
+		{
+			//Sides
+			double side1 = 5.24;
+			double side2 = 10.53;
+			double side3 = 6.45;
+
+			//Anlges
+			double angleA = 0;
+			double angleB = 0;
+			double angleC = 0;
+
+			//Run function
+			CalculateAngles(side1, side2, side3, &angleA, &angleB, &angleC);
+
+			//Floating point number accuracy allowance
+			double fpErrorAllowance = 0.01;
+
+			Assert::AreEqual(23.01, angleA, fpErrorAllowance);
+			Assert::AreEqual(128.22, angleB, fpErrorAllowance);
+			Assert::AreEqual(28.76, angleC, fpErrorAllowance);
+		}
+
+	};
 }
