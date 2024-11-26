@@ -75,14 +75,23 @@ char* FindTypeOfTriangle(double angleA, double angleB, double angleC) {
                 return "Right";
             }
 
+            // Check for obtuse triangle (one angle > than 90)
+            if (angleA > 90.0 || angleB > 90.0 || angleC > 90.0) {
+                printf("It is also an Obtuse Triangle\n");
+
+                return "IObtuse";
+            }
+
+            //Check for acute angle (all angles < 90)
+            if(angleA < 90.0 && angleB < 90.0 && angleC < 90.0) {
+                printf("It is also an Acute Triangle.\n");
+
+                return "AIsosceles";
+            }
+
             return "Isosceles";
         }
 
-        // Check for obtuse triangle (one angle greater than 90)
-        if (angleA > 90.0 || angleB > 90.0 || angleC > 90.0) {
-            printf("The chosen angles create an Obtuse Triangle\n");
-            return "Obtuse";
-        }
 
         // Check for scalene triangle (all angles are different)
         if (fabs(angleA - angleB) >= tolerance && fabs(angleB - angleC) >= tolerance && fabs(angleA - angleC) >= tolerance) {
@@ -91,15 +100,17 @@ char* FindTypeOfTriangle(double angleA, double angleB, double angleC) {
             // Check if it's also acute (all angles less than 90)
             if (angleA < 90.0 && angleB < 90.0 && angleC < 90.0) {
                 printf("It is also an Acute Triangle.\n");
-                return "Acute Scalene";
+
+                return "AScalene";
             }
+
+            if (angleA > 90.0 || angleB > 90.0 || angleC > 90.0) {
+                printf("It is also an Obtuse Triangle.\n");
+                return "OScalene";
+            } 
 
             return "Scalene";
         }
-
-        // Otherwise, it must be acute (all angles less than 90)
-        printf("The chosen angles create an Acute Triangle\n");
-        return "Acute";
     }
 
     // If angles do not form a valid triangle

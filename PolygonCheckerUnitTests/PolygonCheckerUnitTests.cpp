@@ -207,7 +207,7 @@ namespace PolygonCheckerUnitTests
 		}
 	};
 
-	//Area Tests -----------------------------------------------
+	//Area Tests ----------------------------------------------------
 
 	TEST_CLASS(AreaClockwiseFunctionalityTests)
 	{
@@ -223,7 +223,8 @@ namespace PolygonCheckerUnitTests
 		}
 	};
 
-	//============================================================= Triangle Functions ======================================================
+
+	//============================================================= Triangle Test Functions ============================================================
 
 	TEST_CLASS(TriangleFunctionalityTests)
 	{
@@ -279,6 +280,15 @@ namespace PolygonCheckerUnitTests
 			double side1 = -5;
 			double side2 = -5;
 			double side3 = -5;
+
+			Assert::IsFalse(CanFormTriangle(side1, side2, side3));
+		}
+
+		TEST_METHOD(CheckIfTriangleBadLengths)
+		{
+			double side1 = 100;
+			double side2 = 2;
+			double side3 = 2;
 
 			Assert::IsFalse(CanFormTriangle(side1, side2, side3));
 		}
@@ -416,7 +426,7 @@ namespace PolygonCheckerUnitTests
 
 			char* result = FindTypeOfTriangle(angleA, angleB, angleC);
 
-			Assert::AreEqual("Isosceles", result);
+			Assert::AreEqual("AIsosceles", result);
 
 		}
 
@@ -429,7 +439,7 @@ namespace PolygonCheckerUnitTests
 
 			char* result = FindTypeOfTriangle(angleA, angleB, angleC);
 
-			Assert::AreEqual("Obtuse", result);
+			Assert::AreEqual("OScalene", result);
 
 		}
 
@@ -443,6 +453,19 @@ namespace PolygonCheckerUnitTests
 			char* result = FindTypeOfTriangle(angleA, angleB, angleC);
 
 			Assert::AreEqual("Right", result);
+
+		}
+
+		TEST_METHOD(FindScaleneTriangle)
+		{
+			//Right angle triangle 
+			double angleA = 40;
+			double angleB = 30;
+			double angleC = 110;
+
+			char* result = FindTypeOfTriangle(angleA, angleB, angleC);
+
+			Assert::AreEqual("OScalene", result);
 
 		}
 
