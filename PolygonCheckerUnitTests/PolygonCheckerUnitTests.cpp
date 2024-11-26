@@ -20,14 +20,15 @@ extern "C" bool CalculateRectangleArea(double points[4][2]);
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace PolygonCheckerUnitTests //Functionality Tests
+namespace PolygonCheckerUnitTests 
 {
+	//Checks to see basic rectangles return true ----------------------------------------------------
 	TEST_CLASS(CheckInputPointsForRectangleClockwise)
 	{
 	public:
 		
 		//Clockwise functionality tests
-		TEST_METHOD(CheckPositiveValues)
+		TEST_METHOD(CheckPositiveShape)
 		{
 			double points[4][2] = { {3,4}, {3,0}, {0,0}, {0,4} };
 
@@ -47,6 +48,29 @@ namespace PolygonCheckerUnitTests //Functionality Tests
 
 			Assert::IsTrue(IsRectangle(points));
 		}
+
+
+		TEST_METHOD(CheckSamePointsNegative1)
+		{
+			double points[4][2] = { {-1,-1}, {-1,-1}, {-1,-1}, {-1,-1} };
+
+			Assert::IsFalse(IsRectangle(points));
+		}
+
+		TEST_METHOD(CheckDecimalPairs)
+		{
+			double points[4][2] = { {0.5,0.5}, {0.5,-0.5}, {-0.7,-0.5}, {-0.7,0.5} };
+
+			Assert::IsTrue(IsRectangle(points));
+		}
+
+	};
+
+	//Check same points validation to make sure a single point is not a rectangle -----------------------------------
+
+	TEST_CLASS(CheckSamePointValidation)
+	{
+	public:
 
 		TEST_METHOD(CheckSamePoints1)
 		{
@@ -69,21 +93,10 @@ namespace PolygonCheckerUnitTests //Functionality Tests
 			Assert::IsFalse(IsRectangle(points));
 		}
 
-		TEST_METHOD(CheckSamePointsNegative1)
-		{
-			double points[4][2] = { {-1,-1}, {-1,-1}, {-1,-1}, {-1,-1} };
-
-			Assert::IsFalse(IsRectangle(points));
-		}
-
-		TEST_METHOD(CheckDecimalPairs)
-		{
-			double points[4][2] = { {0.5,0.5}, {0.5,-0.5}, {-0.7,-0.5}, {-0.7,0.5} };
-
-			Assert::IsTrue(IsRectangle(points));
-		}
 
 	};
+
+	//Checks to see if squares return as rectangles ---------------------------------------------------
 
 	TEST_CLASS(CheckSquaresInputClockwise)
 	{
@@ -121,6 +134,9 @@ namespace PolygonCheckerUnitTests //Functionality Tests
 		}
 	};
 
+
+	//Checks to see if diagnol/unaligned recangles return true as being a rectangle -----------------------------
+
 	TEST_CLASS(CheckDiagonalRectanglesClockwise) //Return true
 	{
 	public:
@@ -149,6 +165,8 @@ namespace PolygonCheckerUnitTests //Functionality Tests
 
 		}
 	};
+
+	//Checks if other quad shapes do not return as a rectangle ----------------------------------------------
 
 	TEST_CLASS(CheckQuadShapes) //Return false
 	{
