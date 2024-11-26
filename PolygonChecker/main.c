@@ -40,13 +40,17 @@ int main()
 			//Check to see if triangle can be formed
 			if (CanFormTriangle(triangleSideA, triangleSideB, triangleSideC)) {
 
+				//Print triangle confirmation
 				printf("\n");
 				printf("The side lengths can form a triangle.\n");
 
+				//Calculate the angles of the sides given
 				CalculateAngles(triangleSideA, triangleSideB, triangleSideC, &triangleAngleA, &triangleAngleB, &triangleAngleC); 
 
+				//Use angles to determine type of triangle
 				FindTypeOfTriangle(triangleAngleA, triangleAngleB, triangleAngleC);
 
+				//Print details
 				printf("\n");
 				printf("The angles of the triangle are:\n");
 				printf("Angle A: %.2f degrees\n", triangleAngleA);
@@ -57,6 +61,7 @@ int main()
 			}
 			else
 			{
+				//Print not a triangle
 				printf("\n");
 				printf("The side lengths cannot form a triangle.\n");
 				printf("\n");
@@ -72,9 +77,12 @@ int main()
 
 			//If the points form a rectangle
 			if (IsRectangle(points)) {
+
+				//Calculate area and perimeter
 				double perimeter = CalculatePerimeter(points);
 				double area = CalculateRectangleArea(points);
 
+				//Print all the details
 				printf("\n");
 				printf("The points you entered form a rectangle\n");
 				printf("Perimeter: %.2f\n", perimeter);
@@ -84,8 +92,10 @@ int main()
 			//If points dont create rectangle
 			else { 
 
+				//Still calculate perimeter
 				double perimeter = CalculatePerimeter(points);
 
+				//Print out details
 				printf("These points do not form a rectangle.\n");
 				printf("The perimeter of this shape is: %.2f\n", perimeter);
 			}
@@ -109,6 +119,7 @@ int main()
 	return 0;
 }
 
+//Welcome menu
 void PrintWelcome() 
 {
 	printf_s("\n");
@@ -119,6 +130,7 @@ void PrintWelcome()
 	printf("\n");
 }
 
+//Shapes menu
 int PrintShapeMenu() 
 {
 	printf_s("1. Triangle\n");

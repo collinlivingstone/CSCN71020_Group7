@@ -6,6 +6,7 @@
 // Function to calculate distance between two points
 double Distance(double x1, double y1, double x2, double y2);
 
+// Function to get input from user
 void InputPointsRectangle(double points[4][2]);
 
 // Function to calculate squared distance between two points
