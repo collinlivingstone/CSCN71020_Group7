@@ -56,6 +56,7 @@ char* FindTypeOfTriangle(double angleA, double angleB, double angleC) {
     //1e-6 is the room for error (with floating point math)
     printf("\n");
 
+    //Check to see if it is a triangle
     if (angleA + angleB + angleC == 180) {
 
         // Check for equilateral triangle (all angles are 60)
@@ -96,6 +97,8 @@ char* FindTypeOfTriangle(double angleA, double angleB, double angleC) {
         printf("The chosen sides create an Acute Triangle\n");
         return "NTriangle";
     }
+
+    printf("\n");
 }
 
 

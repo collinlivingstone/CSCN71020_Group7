@@ -18,6 +18,8 @@ int main()
 
 	while (continueProgram) 
 	{
+		printf("=========================================================");
+		printf("\n");
 		PrintWelcome();
 
 		int shapeChoice = PrintShapeMenu();
@@ -27,6 +29,7 @@ int main()
 		{
 		case 1://triangle Selected
 
+			printf("\n");
 			printf("Please enter the side lengths of the triangle:\n");
 
 			//Get side lengths
@@ -44,13 +47,17 @@ int main()
 
 				FindTypeOfTriangle(triangleAngleA, triangleAngleB, triangleAngleC);
 
+				printf("\n");
 				printf("The angles of the triangle are:\n");
 				printf("Angle A: %.2f degrees\n", triangleAngleA);
 				printf("Angle B: %.2f degrees\n", triangleAngleB);
 				printf("Angle C: %.2f degrees\n", triangleAngleC);
+				printf("\n");
+
 			}
 			else
 			{
+				printf("\n");
 				printf("The side lengths cannot form a triangle.\n");
 				printf("\n");
 			}
