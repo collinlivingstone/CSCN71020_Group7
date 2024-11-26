@@ -105,6 +105,7 @@ double CalculateRectangleArea(double points[4][2]) {
 
     double distances[6];
     int k = 0;
+
     for (int i = 0; i < 4; i++) {
         for (int j = i + 1; j < 4; j++) {
             distances[k++] = DistanceSquared(points[i][0], points[i][1], points[j][0], points[j][1]);

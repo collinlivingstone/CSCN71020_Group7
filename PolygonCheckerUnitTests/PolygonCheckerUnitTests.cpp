@@ -76,6 +76,13 @@ namespace PolygonCheckerUnitTests //Functionality Tests
 			Assert::IsFalse(IsRectangle(points));
 		}
 
+		TEST_METHOD(CheckDecimalPairs)
+		{
+			double points[4][2] = { {0.5,0.5}, {0.5,-0.5}, {-0.7,-0.5}, {-0.7,0.5} };
+
+			Assert::IsTrue(IsRectangle(points));
+		}
+
 	};
 
 	TEST_CLASS(CheckSquaresInputClockwise)
@@ -192,15 +199,16 @@ namespace PolygonCheckerUnitTests //Functionality Tests
 
 	//Area Tests -----------------------------------------------
 
-	TEST_CLASS(PerimeterClockwiseFunctionalityTests)
+	TEST_CLASS(AreaClockwiseFunctionalityTests)
 	{
 	public:
 		TEST_METHOD(CheckPerimeterSquare)
 		{
 			double points[4][2] = { {1,1}, {1,-1}, {-1,-1}, {-1,1} };
-			double result = CalculatePerimeter(points);
 
-			Assert::AreEqual(8.0, result);
+			double result = CalculateRectangleArea(points);
+
+			Assert::AreEqual(4.0, result);
 
 		}
 
@@ -215,23 +223,32 @@ namespace PolygonCheckerUnitTests //Functionality Tests
 	{
 	public:
 
-		//Simpmle equalateral check
+		// Can form triangle equalateral functionality checks
 		TEST_METHOD(CheckIfTrianglePositive)
 		{
-			int side1 = 5;
-			int side2 = 5;
-			int side3 = 5;
+			double side1 = 5;
+			double side2 = 5;
+			double side3 = 5;
 
 			Assert::IsTrue(CanFormTriangle(side1, side2, side3));
 		}
 
-		TEST_METHOD(CheckIfTriangleNegative)
+		TEST_METHOD(CheckIfTriangleDecimals)
 		{
-			int side1 = -5;
-			int side2 = -5;
-			int side3 = -5;
+			double side1 = 3.3;
+			double side2 = 3.3;
+			double side3 = 3.3;
 
-			Assert::IsFalse(CanFormTriangle(side1, side2, side3));
+			Assert::IsTrue(CanFormTriangle(side1, side2, side3));
+		}
+
+		TEST_METHOD(CheckIfTriangleLessThanOne)
+		{
+			double side1 = 0.5;
+			double side2 = 0.5;
+			double side3 = 0.5;
+
+			Assert::IsTrue(CanFormTriangle(side1, side2, side3));
 		}
 
 
@@ -242,17 +259,16 @@ namespace PolygonCheckerUnitTests //Functionality Tests
 	{
 	public:
 
-		//Simple checks
-		TEST_METHOD(CheckIfTrianglePositive)
+		TEST_METHOD(CheckIfTriangleNegative1)
 		{
-			int side1 = 5;
-			int side2 = 5;
-			int side3 = 5;
+			int side1 = -0.5;
+			int side2 = -0.5;
+			int side3 = -0.5;
 
-			Assert::IsTrue(CanFormTriangle(side1, side2, side3));
+			Assert::IsFalse(CanFormTriangle(side1, side2, side3));
 		}
 
-		TEST_METHOD(CheckIfTriangleNegative)
+		TEST_METHOD(CheckIfTriangleNegative2)
 		{
 			int side1 = -5;
 			int side2 = -5;
@@ -263,4 +279,7 @@ namespace PolygonCheckerUnitTests //Functionality Tests
 
 
 	};
+
+
+	//Calculate angle tests ----------------------------------------------
 }
