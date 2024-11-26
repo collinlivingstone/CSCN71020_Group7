@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <string.h> 
 
-//Retireve input from the user for their shape
+//Retireve input from the user for their shape - this is infinite for some reason
 void InputPointsRectangle(double points[4][2]) {
     printf("Enter the coordinates of four points (x y):\n");
 
@@ -87,11 +87,15 @@ double CalculatePerimeter(double points[4][2]) {
 
     double perimeter = 0;
 
+    printf("\n");
+
     for (int i = 0; i < 4; i++) {
         double dist = Distance(points[i][0], points[i][1], points[(i + 1) % 4][0], points[(i + 1) % 4][1]);
-        printf("DEBUG: Distance between point %d and point %d: %.2f\n", i + 1, (i + 1) % 4 + 1, dist);  // Debugging line
+        printf("Distance between point %d and point %d: %.2f\n", i + 1, (i + 1) % 4 + 1, dist);  // Debugging line
         perimeter += dist;
     }
+
+    printf("\n");
 
     return perimeter;
 }
