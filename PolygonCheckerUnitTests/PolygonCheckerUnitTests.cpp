@@ -1,15 +1,11 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 
-//•	"type of triangle" functionality.
-//•	"triangle inside angle" functionality.
-//•	"4 points" functionality.
-
-
 //Triangle testing functions
 extern "C" void CalculateAngles(double, double, double, double*, double*, double*);
 extern "C" int CanFormTriangle(double, double, double);
 extern "C" void CalculateAngles(double, double, double, double*, double*, double*);
+extern "C" char* FindTypeOfTriangle(double, double, double);
 
 //Rectangle testing functions
 extern "C" double Distance(double, double, double, double);
@@ -291,7 +287,6 @@ namespace PolygonCheckerUnitTests
 			Assert::IsFalse(CanFormTriangle(side1, side2, side3));
 		}
 
-
 	};
 
 
@@ -395,4 +390,84 @@ namespace PolygonCheckerUnitTests
 		}
 
 	};
+
+
+	//Find type of triangle tests ----------------------------------------------
+
+	TEST_CLASS(TestTypeOfTriangle)
+	{
+	public:
+
+		TEST_METHOD(FindEquilateralTriangle)
+		{
+			//Anlges
+			double angleA = 60;
+			double angleB = 60;
+			double angleC = 60;
+
+			char* result = FindTypeOfTriangle(angleA, angleB, angleC);
+
+			Assert::AreEqual("Equilateral", result);
+			
+		}
+
+		TEST_METHOD(FindIsosceleseTriangle)
+		{
+			//Anlges
+			double angleA = 36;
+			double angleB = 72;
+			double angleC = 72;
+
+			char* result = FindTypeOfTriangle(angleA, angleB, angleC);
+
+			Assert::AreEqual("Isosceles", result);
+
+		}
+
+		TEST_METHOD(FindObtuseTriangle)
+		{
+			//Anlges
+			double angleA = 50;
+			double angleB = 110;
+			double angleC = 20;
+
+			char* result = FindTypeOfTriangle(angleA, angleB, angleC);
+
+			Assert::AreEqual("Obtuse", result);
+
+		}
+
+		TEST_METHOD(FindRightTriangle)
+		{
+			//Anlges
+			double angleA = 45;
+			double angleB = 45;
+			double angleC = 90;
+
+			char* result = FindTypeOfTriangle(angleA, angleB, angleC);
+
+			Assert::AreEqual("Right", result);
+
+		}
+
+		TEST_METHOD(FindNotATriangle)
+		{
+			//Anlges
+			double angleA = 180;
+			double angleB = 105;
+			double angleC = 200;
+
+			char* result = FindTypeOfTriangle(angleA, angleB, angleC);
+
+			Assert::AreEqual("NTriangle", result);
+
+		}
+
+
+	};
+
+
+
+
+
 }

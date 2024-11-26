@@ -50,30 +50,51 @@ void CalculateAngles(double sideA, double sideB, double sideC, double* angleA, d
     *angleC = acos((sideA * sideA + sideB * sideB - sideC * sideC) / (2 * sideA * sideB)) * (180.0 / M_PI);
 }
 
-void FindTypeOfTriangle(double angleA, double angleB, double angleC) {
+char* FindTypeOfTriangle(double angleA, double angleB, double angleC) {
+
 
     //1e-6 is the room for error (with floating point math)
     printf("\n");
 
-    // Check for equilateral triangle (all angles are 60)
-    if (fabs(angleA - 60.0) < 1e-6 && fabs(angleB - 60.0) < 1e-6 && fabs(angleC - 60.0) < 1e-6) {
-        printf("The chosen sides creates an Equilateral Triangle\n");
+    if (angleA + angleB + angleC == 180) {
+
+        // Check for equilateral triangle (all angles are 60)
+        if (fabs(angleA - 60.0) < 1e-6 && fabs(angleB - 60.0) < 1e-6 && fabs(angleC - 60.0) < 1e-6) {
+            printf("The chosen sides creates an Equilateral Triangle\n");
+            return "Equilateral";
+        }
+
+        // Check for isosceles triangle (two angles are the same)
+        else if (fabs(angleA - angleB) < 1e-6 || fabs(angleB - angleC) < 1e-6 || fabs(angleA - angleC) < 1e-6) {
+            printf("The chosen sides create an Isosceles Triangle\n");
+
+
+            //Check if it is a right angle
+            if (angleA == 90 || angleB == 90 || angleC == 90) {
+
+                printf("It is a right angle.\n");
+                return "Right";
+
+            }
+            else
+            {
+                return "Isosceles";
+            }
+                
+        }
+
+        // Check for obtuse triangle (one angle is greater than 90)
+        else if (angleA > 90.0 || angleB > 90.0 || angleC > 90.0 && angleA + angleB + angleC == 180) {
+            printf("The chosen sides create an Obtuse Triangle\n");
+            return "Obtuse";
+        }
+
     }
-    // Check for isosceles triangle (two angles are the same)
-    else if (fabs(angleA - angleB) < 1e-6 || fabs(angleB - angleC) < 1e-6 || fabs(angleA - angleC) < 1e-6) {
-        printf("The chosen sides create an Isosceles Triangle\n");
-    }
-    // Check for right triangle (one angle is 90)
-    else if (fabs(angleA - 90.0) < 1e-6 || fabs(angleB - 90.0) < 1e-6 || fabs(angleC - 90.0) < 1e-6) {
-        printf("The chosen sides create a Right Triangle\n");
-    }
-    // Check for obtuse triangle (one angle is greater than 90)
-    else if (angleA > 90.0 || angleB > 90.0 || angleC > 90.0) {
-        printf("The chosen sides create an Obtuse Triangle\n");
-    }
+    
     // If none of the above, it must be an acute triangle (all angles less than 90)
     else {
         printf("The chosen sides create an Acute Triangle\n");
+        return "NTriangle";
     }
 }
 

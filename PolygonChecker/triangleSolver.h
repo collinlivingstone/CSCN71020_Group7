@@ -6,4 +6,4 @@ bool CanFormTriangle(double, double, double);
 
 void CalculateAngles(double, double, double, double*, double*, double*);
 
-void FindTypeOfTriangle(double, double, double);
+char* FindTypeOfTriangle(double, double, double);
