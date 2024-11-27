@@ -17,6 +17,33 @@ void InputPointsRectangle(double points[4][2]) {
             i--; // Return to the current point
         }
     }
+    double sides[];
+    getSides(points, sides[]);
+}
+double getSides(double points[4][2]) {
+    double distances[6];
+    int k = 0;
+    for (int i = 0; i < 4; i++) {
+        for (int j = i + 1; j < 4; j++) {
+            distances[k++] = DistanceSquared(points[i][0], points[i][1], points[j][0], points[j][1]);
+
+        }
+    }
+
+    for (int i = 0; i < 7 - 1; i++) {
+        for (int j = 0; j < 7 - i - 1; j++) {
+            if (distances[j] > distances[j + 1]) {
+                double temp = distances[j];
+                distances[j] = distances[j + 1];
+                distances[j + 1] = temp;
+
+            }
+
+        }
+    }
+    double diagonal = distances[5];
+    double diagonal1 = distances[6];
+
 }
 
 // Calculate the actual distance between two points
@@ -91,6 +118,7 @@ double CalculatePerimeter(double points[4][2]) {
         double dist = Distance(points[i][0], points[i][1], points[(i + 1) % 4][0], points[(i + 1) % 4][1]);
         printf("DEBUG: Distance between point %d and point %d: %.2f\n", i + 1, (i + 1) % 4 + 1, dist);  // Debugging line
         perimeter += dist;
+       
     }
 
     return perimeter;

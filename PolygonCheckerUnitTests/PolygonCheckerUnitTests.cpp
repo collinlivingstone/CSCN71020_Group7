@@ -212,7 +212,7 @@ namespace PolygonCheckerUnitTests
 	TEST_CLASS(AreaClockwiseFunctionalityTests)
 	{
 	public:
-		TEST_METHOD(CheckPerimeterSquare)
+		TEST_METHOD(CheckAreaSquare)
 		{
 			double points[4][2] = { {1,1}, {1,-1}, {-1,-1}, {-1,1} };
 
