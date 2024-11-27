@@ -11,8 +11,8 @@ extern "C" double Distance(double, double, double, double);
 extern "C" double DistanceSquared(double, double, double, double);
 
 extern "C" bool IsRectangle(double points[4][2]); //Tested
-extern "C" bool CalculatePerimeter(double points[4][2]); //Need to test
-extern "C" bool CalculateRectangleArea(double points[4][2]); //Need to test
+extern "C" double CalculatePerimeter(double points[4][2]); //Need to test
+extern "C" double CalculateRectangleArea(double points[4][2]); //Need to test
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
