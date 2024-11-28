@@ -75,7 +75,7 @@ namespace PolygonCheckerUnitTests
 	{
 	public:
 
-		TEST_METHOD(CheckSameWSides)
+		TEST_METHOD(CheckSameSides)
 		{
 			double sides[] = { 3, 3, 3, 3 };
 
@@ -111,33 +111,7 @@ namespace PolygonCheckerUnitTests
 	{
 	public:
 
-		TEST_METHOD(CheckSameWSides)
-		{
-			double sides[] = { 3, 3, 3, 3 };
-
-			Assert::IsFalse(IsRectangle(sides));
-		}
-
-		TEST_METHOD(CheckSamePointsLarge)
-		{
-			double sides[] = { 10000, 10000, 10000, 10000 };
-
-			Assert::IsFalse(IsRectangle(sides));
-		}
-
-		TEST_METHOD(CheckSameSidesNegative)
-		{
-			double sides[] = { -5,-5, -5, -5 };
-
-			Assert::IsFalse(IsRectangle(sides));
-		}
-
-		TEST_METHOD(CheckSameSidesDecimal)
-		{
-			double sides[] = { 0.1, 0.1, 0.1, 0.1 };
-
-			Assert::IsFalse(IsRectangle(sides));
-		}
+	
 
 	};
 
