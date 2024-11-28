@@ -5,45 +5,97 @@
 
 //Retireve input from the user for their shape
 void InputPointsRectangle(double points[4][2]) {
-    printf("Enter the coordinates of four points (x y):\n");
 
+    bool duplicatePoint = false;
+
+        //Prompt
+    printf("\n");
+    printf("Enter coordinates of four points in any order: \n");
+
+        //For each point request an input in (x y) format
     for (int i = 0; i < 4; i++) {
-        printf("Point %d (format x y): ", i + 1);
 
-        //If 2 points werent inputed
-        if (scanf("%lf %lf", &points[i][0], &points[i][1]) != 2) {
+        while (true) {
 
-            printf("Invalid input. Please try again.\n");
-            i--; // Return to the current point
+            printf("Point %d (format x y): ", i + 1);
+
+            //this is to specify the input format and figure out if the input 
+            //is not in the format, this checks point i of (x and y)
+            if (scanf("%lf %lf", &points[i][0], &points[i][1]) != 2) {
+
+                //Error not in the right format
+                printf("\n");
+                printf("Invalid input. Please enter a coordinate.\n");
+                while (getchar() != '\n');
+                continue;
+            }
+
+            //Check to see if point entered is the same as another point 
+            //entered before it
+
+            for (int j = 0; j < i; j++) {
+
+                if (points[i][0] == points[j][0] && points[i][1] == points[j][1]) {
+                    duplicatePoint = true;
+                    break;
+                }
+
+            }
+
+            //If there is a duplicate notify the user there was duplicate point(s)
+            if (duplicatePoint) {
+
+                printf("\n");
+                printf("Same point detected. Please enter a different point.\n");
+
+                continue;
+            }
+
+            break;
+
         }
+
     }
-    double sides[];
-    getSides(points, sides[]);
 }
-double getSides(double points[4][2]) {
-    double distances[6];
+
+//New get sides function to calculate the right sides for a rectangle
+
+void GetSides(double points[4][2], double sides[4]) {
+
+    double distances[6] = { 0 };
     int k = 0;
+
+    // Compute all pairwise distances
     for (int i = 0; i < 4; i++) {
         for (int j = i + 1; j < 4; j++) {
-            distances[k++] = DistanceSquared(points[i][0], points[i][1], points[j][0], points[j][1]);
-
+            distances[k++] = Distance(points[i][0], points[i][1], points[j][0], points[j][1]);
         }
     }
 
-    for (int i = 0; i < 7 - 1; i++) {
-        for (int j = 0; j < 7 - i - 1; j++) {
+    // Sort distances small to large to check rectangle
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5 - i; j++) {
             if (distances[j] > distances[j + 1]) {
                 double temp = distances[j];
                 distances[j] = distances[j + 1];
                 distances[j + 1] = temp;
-
             }
-
         }
     }
-    double diagonal = distances[5];
-    double diagonal1 = distances[6];
 
+    // Assign the first four (shortest) distances to sides
+    for (int i = 0; i < 4; i++) {
+        sides[i] = distances[i];
+    }
+
+        
+    //Print sides
+    printf("\n");
+    printf("Sides:\n");
+    for (int i = 0; i < 4; i++) {
+        printf("%.2f ", sides[i]);
+    }
+    printf("\n");
 }
 
 // Calculate the actual distance between two points
@@ -56,105 +108,57 @@ double DistanceSquared(double x1, double y1, double x2, double y2) {
     return (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
 }
 
-// Function to determine if four points form a rectangle
-bool IsRectangle(double points[4][2]) {
+bool IsRectangle(double sides[4]) {
 
-    //Check to see if all inputs are the same
-    bool allPointsAreSame = true;
+    double width1 = sides[0];
+    double width2 = sides[1];
+    double length1 = sides[2];
+    double length2 = sides[3];
 
 
-    //Iterate through points and compare them to see if they are the same
+    //Extra validation incase there is any negative sides calculated
     for (int i = 0; i < 4; i++) {
-        if (points[i][0] != points[0][0] || points[i][0] != points[0][1]) {
-            allPointsAreSame = false;
-            break; //exit loop
-        }
+
+        if (sides[i] < 0)
+            return false;
+
     }
 
-    //If all the points are the same return false, it is not a rectangle
-    if (allPointsAreSame) {
-        printf("Same points detected\n");
+    if (width1 != length1 && width1 == width2 && length1 == length2) {
+
+        //Is a rectangle
+        return true;
+    }
+    else {
+
+        //Not a rectangle
         return false;
     }
 
-
-    // Find all six pairwise squared distances
-    double distances[6];
-    int k = 0;
-    for (int i = 0; i < 4; i++) {
-        for (int j = i + 1; j < 4; j++) {
-            distances[k++] = DistanceSquared(points[i][0], points[i][1], points[j][0], points[j][1]);
-        }
-    }
-
-    // Sort the distances (smallest to largest)
-    for (int i = 0; i < 6 - 1; i++) {
-        for (int j = 0; j < 6 - i - 1; j++) {
-            if (distances[j] > distances[j + 1]) {
-                double temp = distances[j];
-                distances[j] = distances[j + 1];
-                distances[j + 1] = temp;
-            }
-        }
-    }
-
-    // Check rectangle properties:
-    // - First two distances are equal (sides)
-    // - Next two distances are equal (sides)
-    // - Last two distances are equal (diagonals)
-    return fabs(distances[0] - distances[1]) < 1e-6 &&  // First side pair equal
-        fabs(distances[2] - distances[3]) < 1e-6 &&  // Second side pair equal
-        fabs(distances[4] - distances[5]) < 1e-6 &&  // Diagonals equal
-        fabs(distances[0] + distances[2] - distances[4]) < 1e-6;  // Pythagorean property
 }
 
-
 // Calculate the perimeter of four points
-double CalculatePerimeter(double points[4][2]) {
+double CalculatePerimeter(double sides[4]) {
 
+    
     double perimeter = 0;
 
-    for (int i = 0; i < 4; i++) {
-        double dist = Distance(points[i][0], points[i][1], points[(i + 1) % 4][0], points[(i + 1) % 4][1]);
-        printf("DEBUG: Distance between point %d and point %d: %.2f\n", i + 1, (i + 1) % 4 + 1, dist);  // Debugging line
-        perimeter += dist;
-       
-    }
+    //add up all sides of the quad shape
+    perimeter = sides[0] + sides[1] + sides[2] + sides[3];
 
     return perimeter;
+   
 }
 
 // Calculate the area of a rectangle 
-double CalculateRectangleArea(double points[4][2]) {
+double CalculateRectangleArea(double sides[4]) {
 
-    if (!IsRectangle(points)) {
-        return -1; // Return -1 to indicate it's not a rectangle
-    }
+    //Sorted array widths = [0][1] length = [2][3]
+    double length = sides[2];
+    double width = sides[0];
 
-    double distances[6];
-    int k = 0;
+    double area = length * width;
 
-    for (int i = 0; i < 4; i++) {
-        for (int j = i + 1; j < 4; j++) {
-            distances[k++] = DistanceSquared(points[i][0], points[i][1], points[j][0], points[j][1]);
-        }
-    }
-
-    // Sort distances
-    double sortedDistances[6];
-
-    memcpy(sortedDistances, distances, 6 * sizeof(double));
-
-    for (int i = 0; i < 6 - 1; i++) {
-        for (int j = 0; j < 6 - i - 1; j++) {
-            if (sortedDistances[j] > sortedDistances[j + 1]) {
-                double temp = sortedDistances[j];
-                sortedDistances[j] = sortedDistances[j + 1];
-                sortedDistances[j + 1] = temp;
-            }
-        }
-    }
-
-    // Area = side1 * side2
-    return sqrt(sortedDistances[0]) * sqrt(sortedDistances[2]);
+    return area;
+   
 }

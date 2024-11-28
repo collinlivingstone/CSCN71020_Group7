@@ -7,6 +7,7 @@
 
 int side = 0;
 double points[4][2];
+double sides[4] = { 0.0 };
 
 int main() 
 {
@@ -79,11 +80,14 @@ int main()
 			//Get rectangle input
 			InputPointsRectangle(points);
 
+			//Get the sides of the shape
+			GetSides(points, sides);
+
 			//If the points form a rectangle
-			if (IsRectangle(points)) {
+			if (IsRectangle(sides)) {
 
 				//Calculate area and perimeter
-				double perimeter = CalculatePerimeter(points);
+				double perimeter = CalculatePerimeter(sides);
 				double area = CalculateRectangleArea(points);
 
 				//Print all the details
@@ -97,11 +101,13 @@ int main()
 			else { 
 
 				//Still calculate perimeter
-				double perimeter = CalculatePerimeter(points);
+				double perimeter = CalculatePerimeter(sides);
 
 				//Print out details
+				printf("\n");
 				printf("These points do not form a rectangle.\n");
 				printf("The perimeter of this shape is: %.2f\n", perimeter);
+				printf("\n");
 			}
 
 			break;

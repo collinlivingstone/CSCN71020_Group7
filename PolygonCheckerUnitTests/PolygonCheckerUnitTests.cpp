@@ -10,219 +10,183 @@ extern "C" char* FindTypeOfTriangle(double, double, double); // Tested
 extern "C" double Distance(double, double, double, double);
 extern "C" double DistanceSquared(double, double, double, double);
 
-extern "C" bool IsRectangle(double points[4][2]); //Tested
-extern "C" double CalculatePerimeter(double points[4][2]); //Need to test
-extern "C" double CalculateRectangleArea(double points[4][2]); //Need to test
+extern "C" bool IsRectangle(double[4]); //Tested
+extern "C" double CalculatePerimeter(double[4]); //Need to test
+extern "C" double CalculateRectangleArea(double[4]);
+extern "C" void GetSides(double points[4][2], double[4]); //Need to test
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace PolygonCheckerUnitTests 
 {
 	//Checks to see basic rectangles return true ----------------------------------------------------
-	TEST_CLASS(CheckInputPointsForRectangleClockwise)
+	TEST_CLASS(CheckInputPointsForIsRectangle)
 	{
 	public:
 		
 		//Clockwise functionality tests
-		TEST_METHOD(CheckPositiveShape)
+		TEST_METHOD(CheckBasicRectangle)
 		{
-			double points[4][2] = { {3,4}, {3,0}, {0,0}, {0,4} };
+			double sides[] = { 3,3,4,4 };
 
-			Assert::IsTrue(IsRectangle(points));
+			Assert::IsTrue(IsRectangle(sides));
 		}
 
-		TEST_METHOD(CheckNegativeValues)
+		TEST_METHOD(CheckLargeRectangle)
 		{
-			double points[4][2] = { {-1,1}, {-6,1}, {-6,4}, {-1,4} };
+			double sides[] = { 100, 100, 500, 500 };
 
-			Assert::IsTrue(IsRectangle(points));
+			Assert::IsTrue(IsRectangle(sides));
 		}
 
-		TEST_METHOD(CheckPositiveAndNegative)
+		TEST_METHOD(CheckRectangleLessThanZero)
 		{
-			double points[4][2] = { {-1,1}, {-6,1}, {-6,4}, {-1,4} };
+			double sides[] = { 0.01, 0.01, 0.02, 0.02 };
 
-			Assert::IsTrue(IsRectangle(points));
+			Assert::IsTrue(IsRectangle(sides));
 		}
 
-		TEST_METHOD(CheckDecimalPairings1)
+		TEST_METHOD(CheckRectangleDecimals)
 		{
-			double points[4][2] = { {0.5,0.5}, {0.5,-0.5}, {-0.7,-0.5}, {-0.7,0.5} };
+			double sides[] = { 5.5, 5.5, 6.6, 6.6 };
 
-			Assert::IsTrue(IsRectangle(points));
+			Assert::IsTrue(IsRectangle(sides));
+		}
+
+		TEST_METHOD(CheckNegativeSidesValidation)
+		{
+			double sides[] = { -5, -5, -7, -7 };
+
+			Assert::IsFalse(IsRectangle(sides));
+		}
+
+		TEST_METHOD(CheckSquareIsNotRectangle)
+		{
+			double sides[] = { 5, 5, 5, 5 };
+
+			Assert::IsFalse(IsRectangle(sides));
 		}
 
 	};
 
 	//Check same points validation to make sure a single point is not a rectangle -----------------------------------
 
-	TEST_CLASS(CheckSamePointValidation)
+	TEST_CLASS(CheckSameSidesValidation)
 	{
 	public:
 
-		TEST_METHOD(CheckSamePoints1)
+		TEST_METHOD(CheckSameWSides)
 		{
-			double points[4][2] = { {1,1}, {1,1}, {1,1}, {1,1} };
+			double sides[] = { 3, 3, 3, 3 };
 
-			Assert::IsFalse(IsRectangle(points));
+			Assert::IsFalse(IsRectangle(sides));
 		}
 
-		TEST_METHOD(CheckSamePoints2)
+		TEST_METHOD(CheckSamePointsLarge)
 		{
-			double points[4][2] = { {2,2}, {2,2}, {2,2}, {2,2} };
+			double sides[] = { 10000, 10000, 10000, 10000 };
 
-			Assert::IsFalse(IsRectangle(points));
+			Assert::IsFalse(IsRectangle(sides));
 		}
 
-		TEST_METHOD(CheckSamePoints3)
+		TEST_METHOD(CheckSameSidesNegative)
 		{
-			double points[4][2] = { {3,3}, {3,3}, {3,3}, {3,3} };
+			double sides[] = { -5,-5, -5, -5 };
 
-			Assert::IsFalse(IsRectangle(points));
+			Assert::IsFalse(IsRectangle(sides));
 		}
 
-		TEST_METHOD(CheckSamePointsNegative1)
+		TEST_METHOD(CheckSameSidesDecimal)
 		{
-			double points[4][2] = { {-1,-1}, {-1,-1}, {-1,-1}, {-1,-1} };
+			double sides[] = { 0.1, 0.1, 0.1, 0.1 };
 
-			Assert::IsFalse(IsRectangle(points));
+			Assert::IsFalse(IsRectangle(sides));
 		}
-
 
 	};
 
-	//Checks to see if squares return as rectangles ---------------------------------------------------
+	//Check same points validation to make sure a single point is not a rectangle -----------------------------------
 
-	TEST_CLASS(CheckSquaresInputClockwise)
+	TEST_CLASS(CheckSamePointInputs)
 	{
 	public:
 
-		TEST_METHOD(CheckSquare1)
+		TEST_METHOD(CheckSameWSides)
 		{
-			double points[4][2] = { {-1,1}, {1,1}, {1,-1}, {-1,-1} };
+			double sides[] = { 3, 3, 3, 3 };
 
-			Assert::IsTrue(IsRectangle(points));
-
-		}
-		TEST_METHOD(CheckSquare2)
-		{
-			double points[4][2] = { {-2,2}, {2,2}, {2,-2}, {-2,-2} };
-
-			Assert::IsTrue(IsRectangle(points));
-
+			Assert::IsFalse(IsRectangle(sides));
 		}
 
-		TEST_METHOD(CheckPositiveSquare)
+		TEST_METHOD(CheckSamePointsLarge)
 		{
-			double points[4][2] = { {1,2}, {1,4}, {3,2}, {3,4} };
+			double sides[] = { 10000, 10000, 10000, 10000 };
 
-			Assert::IsTrue(IsRectangle(points));
-
+			Assert::IsFalse(IsRectangle(sides));
 		}
 
-		TEST_METHOD(CheckNegativeSquare)
+		TEST_METHOD(CheckSameSidesNegative)
 		{
-			double points[4][2] = { {-1,-1}, {-3,-1}, {-3,-3}, {-1,-3} };
+			double sides[] = { -5,-5, -5, -5 };
 
-			Assert::IsTrue(IsRectangle(points));
-
+			Assert::IsFalse(IsRectangle(sides));
 		}
+
+		TEST_METHOD(CheckSameSidesDecimal)
+		{
+			double sides[] = { 0.1, 0.1, 0.1, 0.1 };
+
+			Assert::IsFalse(IsRectangle(sides));
+		}
+
 	};
 
 
-	//Checks to see if diagnol/unaligned recangles return true as being a rectangle -----------------------------
 
-	TEST_CLASS(CheckDiagonalRectanglesClockwise) //Return true
+
+
+
+	//Checks to see the side outcomes of collecting points ---------------------------------------------------
+
+	TEST_CLASS(GetSidesFunctionality)
 	{
 	public:
 
-		TEST_METHOD(DialgonalRectangleTest1)
+		TEST_METHOD(GetSidesSquareNoOrder)
 		{
-			double points[4][2] = { {4,0}, {-4,8}, {-8,-4}, {0,4} };
+			double points[4][2] = {{1,1}, {-1,-1}, {1,-1}, {-1,1}};
 
-			Assert::IsTrue(IsRectangle(points));
+			double sides[4];
+
+			GetSides(points, sides);
+
+			//Check each side
+			Assert::AreEqual(2.0, sides[0]);
+			Assert::AreEqual(2.0, sides[1]);
+			Assert::AreEqual(2.0, sides[2]);
+			Assert::AreEqual(2.0, sides[3]);
 
 		}
 
-		TEST_METHOD(DiagonalSquareRectangle)
+		TEST_METHOD(GetSidesDiagonalRectangleNoOrder)
 		{
-			double points[4][2] = { {2,0}, {0,-2}, {-2,0}, {0,2} };
+			double points[4][2] = { {1,3}, {4,0}, {0,-4}, {-3,-1} };
 
-			Assert::IsTrue(IsRectangle(points));
+			double sides[4];
+
+			GetSides(points, sides);
+
+			//Check each side
+			Assert::AreEqual(4.24, sides[0], 0.01);
+			Assert::AreEqual(4.24, sides[1], 0.01);
+			Assert::AreEqual(5.66, sides[2], 0.01);
+			Assert::AreEqual(5.66, sides[3], 0.01);
 
 		}
 
-		TEST_METHOD(RectangleSolverBoundryTests)
-		{
-			double points[4][2] = { {2,0}, {0,-2}, {-2,0}, {0,2} };
-
-			Assert::IsTrue(IsRectangle(points));
-
-		}
+		
+	
 	};
-
-	//Checks if other quad shapes do not return as a rectangle ----------------------------------------------
-
-	TEST_CLASS(CheckQuadShapes) //Return false
-	{
-	public:
-		TEST_METHOD(CheckPosNegQuadShape)
-		{
-			double points[4][2] = { {1,3}, {4,-2}, {-1,-5}, {-7,3} };
-
-			Assert::IsFalse(IsRectangle(points));
-
-		}
-
-		TEST_METHOD(CheckNegQuadShape)
-		{
-			double points[4][2] = { {-1,3}, {4,7}, {-1,-5}, {9,8} };
-
-			Assert::IsFalse(IsRectangle(points));
-
-		}
-
-		TEST_METHOD(CheckPosQuadShape)
-		{
-			double points[4][2] = { {90,54}, {-94,53}, {-80,-65}, {7,-89} };
-
-			Assert::IsFalse(IsRectangle(points));
-
-		}
-	};
-
-
-	//Perimeter Tests -----------------------------------------------
-
-	TEST_CLASS(PerimeterClockwiseFunctionalityTests) 
-	{
-	public:
-		TEST_METHOD(CheckPerimeterSquare)
-		{
-			double points[4][2] = { {1,1}, {1,-1}, {-1,-1}, {-1,1} };
-			double result = CalculatePerimeter(points);
-
-			Assert::AreEqual(8.0, result);
-
-		}
-	};
-
-	//Area Tests ----------------------------------------------------
-
-	TEST_CLASS(AreaClockwiseFunctionalityTests)
-	{
-	public:
-		TEST_METHOD(CheckAreaSquare)
-		{
-			double points[4][2] = { {1,1}, {1,-1}, {-1,-1}, {-1,1} };
-
-			double result = CalculateRectangleArea(points);
-
-			Assert::AreEqual(4.0, result);
-
-		}
-	};
-
 
 	//============================================================= Triangle Test Functions ============================================================
 
