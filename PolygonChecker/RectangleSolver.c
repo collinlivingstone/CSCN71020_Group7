@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include <string.h> 
 
+#define MAX_SIDES 4
+
 //Retireve input from the user for their shape
 void InputPointsRectangle(double points[4][2]) {
 
@@ -13,7 +15,7 @@ void InputPointsRectangle(double points[4][2]) {
     printf("Enter coordinates of four points in any order: \n");
 
         //For each point request an input in (x y) format
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < MAX_SIDES; i++) {
 
         while (true) {
 
@@ -63,14 +65,36 @@ void InputPointsRectangle(double points[4][2]) {
 void GetSides(double points[4][2], double sides[4]) {
 
     double distances[6] = { 0 };
-    int k = 0;
+
+
+    //Checks if points make a line - its not an actual shape
+    for (int i = 0; i < MAX_SIDES; i++) {
+        for (int j = i + 1; j < MAX_SIDES; j++) {
+            for (int l = j + 1; l < MAX_SIDES; l++) {
+                if (CreatesALines(points[i][0], points[i][1],
+                    points[j][0], points[j][1],
+                    points[l][0], points[l][1])) {
+                    printf("\n");
+                    printf("Invalid input: Points do not make a shape.\n");
+                    sides[0] = 0;
+                    sides[1] = 0;
+                    sides[2] = 0;
+                    sides[3] = 0;
+                    return;
+                }
+            }
+        }
+    }
 
     // Compute all pairwise distances
-    for (int i = 0; i < 4; i++) {
+    int k = 0;
+
+    for (int i = 0; i < MAX_SIDES; i++) {
         for (int j = i + 1; j < 4; j++) {
             distances[k++] = Distance(points[i][0], points[i][1], points[j][0], points[j][1]);
         }
     }
+
 
     // Sort distances small to large to check rectangle
     for (int i = 0; i < 5; i++) {
@@ -92,7 +116,7 @@ void GetSides(double points[4][2], double sides[4]) {
     //Print sides
     printf("\n");
     printf("Sides:\n");
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < MAX_SIDES; i++) {
         printf("%.2f ", sides[i]);
     }
     printf("\n");
@@ -108,6 +132,14 @@ double DistanceSquared(double x1, double y1, double x2, double y2) {
     return (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
 }
 
+// Check if points are in a line
+bool CreatesALines(double x1, double y1, double x2, double y2, double x3, double y3) {
+
+    double area = fabs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0;
+    return area < 1e-6;
+}
+
+//Check if rectangle function
 bool IsRectangle(double sides[4]) {
 
     double width1 = sides[0];
@@ -117,11 +149,10 @@ bool IsRectangle(double sides[4]) {
 
 
     //Extra validation incase there is any negative sides calculated
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < MAX_SIDES; i++) {
 
         if (sides[i] < 0)
             return false;
-
     }
 
     if (width1 != length1 && width1 == width2 && length1 == length2) {

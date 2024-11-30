@@ -12,6 +12,9 @@ void GetSides(double points[4][2], double[4]);
 // Function to get input from user
 void InputPointsRectangle(double points[4][2]);
 
+//Check collinear
+bool CreatesALines(double x1, double y1, double x2, double y2, double x3, double y3);
+
 // Function to calculate squared distance between two points
 double DistanceSquared(double x1, double y1, double x2, double y2);
 
